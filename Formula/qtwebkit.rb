@@ -32,7 +32,7 @@ class Qtwebkit < Formula
       -DPORT=Qt
       -DCMAKE_INSTALL_NAME_DIR=#{opt_lib}
     ]
-    system "cmake", ",", *args
+    system "cmake", ".", *args
     system "make"
     system "make", "install"
     frameworks.install_symlink Dir["#{lib}/*.framework"]
