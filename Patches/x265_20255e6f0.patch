@@ -1,0 +1,94 @@
+# https://github.com/HandBrake/HandBrake/tree/33f8f31345/contrib/x265
+diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt
+index 13e4750de..0f0ed64e1 100755
+--- a/source/CMakeLists.txt
++++ b/source/CMakeLists.txt
+@@ -260,7 +260,13 @@ if(GCC)
+         endif()
+     endif()
+ 	if(ARM64 OR CROSS_COMPILE_ARM64)
+-	    set(ARM_ARGS -fPIC -flax-vector-conversions)
++        if (MINGW)
++            set(ARM_ARGS -flax-vector-conversions)
++        elseif(APPLE)
++            set(ARM_ARGS -fPIC -flax-vector-conversions -arch ${CMAKE_OSX_ARCHITECTURES})
++        else()
++            set(ARM_ARGS -fPIC -flax-vector-conversions)
++        endif()
+         find_package(Neon)
+         if(CPU_HAS_NEON)
+             add_definitions(-DHAVE_NEON)
+diff --git a/source/common/aarch64/asm-primitives.cpp b/source/common/aarch64/asm-primitives.cpp
+index 0e10dae2f..ae0f0a9ec 100644
+--- a/source/common/aarch64/asm-primitives.cpp
++++ b/source/common/aarch64/asm-primitives.cpp
+@@ -663,7 +663,7 @@ void setupAssemblyPrimitives(EncoderPrimitives &p, int cpuMask)
+         p.cu[BLOCK_4x4].psy_cost_pp = PFX(psyCost_4x4_neon);
+ 
+         p.weight_pp = PFX(weight_pp_neon);
+-        p.scanPosLast = PFX(scanPosLast_neon);
++        //p.scanPosLast = PFX(scanPosLast_neon);
+ #endif
+ 
+         // quant
+diff --git a/source/common/threading.h b/source/common/threading.h
+index 8a5c39cf0..98271b899 100644
+--- a/source/common/threading.h
++++ b/source/common/threading.h
+@@ -37,6 +37,7 @@
+ #include <semaphore.h>
+ #include <errno.h>
+ #include <fcntl.h>
++#include <sys/stat.h>
+ #endif
+ 
+ #if MACOS
+diff --git a/source/common/threadpool.cpp b/source/common/threadpool.cpp
+index 91e82a24e..f51c749da 100644
+--- a/source/common/threadpool.cpp
++++ b/source/common/threadpool.cpp
+@@ -115,12 +115,6 @@ void WorkerThread::threadMain()
+ {
+     THREAD_NAME("Worker", m_id);
+ 
+-#if _WIN32
+-    SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
+-#else
+-    __attribute__((unused)) int val = nice(10);
+-#endif
+-
+     m_pool.setCurrentThreadAffinity();
+ 
+     sleepbitmap_t idBit = (sleepbitmap_t)1 << m_id;
+@@ -667,9 +661,17 @@ void ThreadPool::getFrameThreadsCount(x265_param* p, int cpuCount)
+     else if (cpuCount >= 32)
+         p->frameNumThreads = (p->sourceHeight > 2000) ? 6 : 5; 
+     else if (cpuCount >= 16)
+-        p->frameNumThreads = 4; 
++#if MACOS && X265_ARCH_ARM64
++        p->frameNumThreads = 16;
++#else
++        p->frameNumThreads = 4;
++#endif
+     else if (cpuCount >= 8)
++#if MACOS && X265_ARCH_ARM64
++        p->frameNumThreads = 8;
++#else
+         p->frameNumThreads = 3;
++#endif
+     else if (cpuCount >= 4)
+         p->frameNumThreads = 2;
+     else
+diff --git a/source/common/version.cpp b/source/common/version.cpp
+index 42a6b1d86..618ff4276 100644
+--- a/source/common/version.cpp
++++ b/source/common/version.cpp
+@@ -71,7 +71,7 @@
+ #define ONOS    "[Unk-OS]"
+ #endif
+ 
+-#if X86_64
++#if X86_64 || defined(__aarch64__)
+ #define BITS    "[64 bit]"
+ #else
+ #define BITS    "[32 bit]"
