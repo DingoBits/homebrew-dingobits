@@ -1,8 +1,6 @@
 class ZlibDougallj < Formula
   desc "Experimental fork of zlib with performance improvements for Apple Silicon"
   homepage "https://github.com/dougallj/zlib-dougallj"
-  url "https://download.qt.io/snapshots/ci/qtwebkit/5.212/latest/src/submodules/qtwebkit-opensource-src-5.212.tar.xz"
-  sha256 "10cbdaba60aac79d27016aa05bae9ab3ec7b0aed4df163debfbf8fddd66adc14"
   license "Zlib"
   head "https://github.com/dougallj/zlib-dougallj.git", branch: "main"
 
