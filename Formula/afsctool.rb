@@ -6,6 +6,12 @@ class Afsctool < Formula
   license all_of: ["GPL-3.0-only", "BSL-1.0"]
   head "https://github.com/RJVB/afsctool.git"
 
+  bottle do
+    root_url "https://github.com/DingoBits/homebrew-dingobits/releases/download/bottles"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_monterey: "399373d0f3775a8ac7d7162dd62e27be40bfd1397a9132bdc1bee09127fb62ae"
+  end
+
   depends_on "cmake" => :build
   depends_on "google-sparsehash" => :build
   depends_on "pkg-config" => :build

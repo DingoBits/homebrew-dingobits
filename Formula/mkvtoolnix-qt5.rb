@@ -11,6 +11,12 @@ class MkvtoolnixQt5 < Formula
     regex(/href=.*?mkvtoolnix[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 
+  bottle do
+    root_url "https://github.com/DingoBits/homebrew-dingobits/releases/download/bottles"
+    rebuild 1
+    sha256 arm64_monterey: "61ac7f5a3259d5c9d9e02057920daeb02ff24958a11f6454b89bb75a417f0f4d"
+  end
+
   head do
     url "https://gitlab.com/mbunkus/mkvtoolnix.git", branch: "main"
     depends_on "autoconf" => :build

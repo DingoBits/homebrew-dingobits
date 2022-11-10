@@ -5,6 +5,12 @@ class Qtwebkit < Formula
   sha256 "10cbdaba60aac79d27016aa05bae9ab3ec7b0aed4df163debfbf8fddd66adc14"
   license all_of: ["GFDL-1.3-only", "GPL-2.0-only", "GPL-3.0-only", "LGPL-2.1-only", "LGPL-3.0-only"]
 
+  bottle do
+    root_url "https://github.com/DingoBits/homebrew-dingobits/releases/download/bottles"
+    rebuild 1
+    sha256 cellar: :any, arm64_monterey: "4d430268c546b727b57d1bdc4ee7cf976d6ab04cd7f3d0f9f9546f990eac58b9"
+  end
+
   depends_on "cmake" => :build
   depends_on "python@3.10" => :build
 

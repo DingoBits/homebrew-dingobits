@@ -17,6 +17,12 @@ class X265 < Formula
     end
   end
 
+  bottle do
+    root_url "https://github.com/DingoBits/homebrew-dingobits/releases/download/bottles"
+    rebuild 1
+    sha256 cellar: :any, arm64_monterey: "080273c0d866d227c968da1cff2d346b5676a0085c7f7d2e47d240c54ebc65a3"
+  end
+
   depends_on "cmake" => :build
 
   on_intel do

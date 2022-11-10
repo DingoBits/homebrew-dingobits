@@ -5,6 +5,12 @@ class QtkeychainQt5 < Formula
   sha256 "20beeb32de7c4eb0af9039b21e18370faf847ac8697ab3045906076afbc4caa5"
   license "BSD-2-Clause"
 
+  bottle do
+    root_url "https://github.com/DingoBits/homebrew-dingobits/releases/download/bottles"
+    rebuild 1
+    sha256 cellar: :any, arm64_monterey: "5f75f24fb40717b99a723a4a0c6ac2646f290da1483f325cad3307d7872946c3"
+  end
+
   depends_on "cmake" => :build
   depends_on "qt@5"
 
