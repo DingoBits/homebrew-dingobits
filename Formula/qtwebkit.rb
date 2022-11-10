@@ -29,7 +29,7 @@ class Qtwebkit < Formula
 
   # Fix build for arm64
   patch do
-    url "https://raw.githubusercontent.com/DingoBits/homebrew/master/Patches/qtwebkit_arm64.patch"
+    url "https://raw.githubusercontent.com/DingoBits/homebrew-dingobits/master/Patches/qtwebkit_arm64.patch"
     sha256 "f74f0a889e9e7ba5c8cc07ddff4ca7c6d4ec23d93b785042c2b424d9d0abb350"
   end
 

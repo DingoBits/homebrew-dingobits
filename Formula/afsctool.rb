@@ -19,7 +19,7 @@ class Afsctool < Formula
 
   # Add LZFSE 1.0+2-e634ca5
   patch do
-    url "https://raw.githubusercontent.com/DingoBits/homebrew/master/Patches/afsctool_lzfse_e634ca5.patch"
+    url "https://raw.githubusercontent.com/DingoBits/homebrew-dingobits/master/Patches/afsctool_lzfse_e634ca5.patch"
     sha256 "92de133352814f3a5fb486e11f8816091e4a273dd1a6f3d49606d44e0951e49b"
   end
 

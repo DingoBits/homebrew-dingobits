@@ -12,7 +12,7 @@ class X265 < Formula
     version "3.5+39-20255e6f0"
     sha256 "f93e8b9e97054ea420aabfba72b5c6fcadb0710ba51855388a3c113fab4445d8"
     patch do
-      url "https://raw.githubusercontent.com/DingoBits/homebrew/master/Patches/x265_20255e6f0.patch"
+      url "https://raw.githubusercontent.com/DingoBits/homebrew-dingobits/master/Patches/x265_20255e6f0.patch"
       sha256 "60776617d1224a28120900b72ef16961dc9663b27bb1bb2092761fbb01bf21f3"
     end
   end
