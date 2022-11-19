@@ -7,20 +7,19 @@ class X265 < Formula
   # Apply HandBrake's patches
   stable do
     # x265 is long overdue for a new point release
-    # 20255e6f0ead is HandBrake's snapshot-20220709
-    url "https://bitbucket.org/multicoreware/x265_git/get/20255e6f0ead.tar.gz"
-    version "3.5+39-20255e6f0"
-    sha256 "f93e8b9e97054ea420aabfba72b5c6fcadb0710ba51855388a3c113fab4445d8"
+    # 40e37bce9 is HandBrake's snapshot-20221114
+    url "https://bitbucket.org/multicoreware/x265_git/get/40e37bce9a35.tar.gz"
+    version "3.5+69-40e37bce9"
+    sha256 "3572b108c2989e2f1d6a823f35c3244d718fbb1f99372ac31a392b1ea01cb96b"
     patch do
-      url "https://raw.githubusercontent.com/DingoBits/homebrew-dingobits/master/Patches/x265_20255e6f0.patch"
-      sha256 "60776617d1224a28120900b72ef16961dc9663b27bb1bb2092761fbb01bf21f3"
+      url "https://raw.githubusercontent.com/DingoBits/homebrew-dingobits/master/Patches/x265-40e37bce9.patch"
+      sha256 "83ef6395bade1b857e0e2e2b399f5834435194216f6a2e5bbc24c00bc0943a8f"
     end
   end
 
   bottle do
     root_url "https://github.com/DingoBits/homebrew-dingobits/releases/download/bottles"
-    rebuild 1
-    sha256 cellar: :any, arm64_monterey: "080273c0d866d227c968da1cff2d346b5676a0085c7f7d2e47d240c54ebc65a3"
+    sha256 cellar: :any, arm64_monterey: "6b3f02dc41509a6a0ee6b6eeb8aeb70cacb28dc68832de6eca89b2f3751e65d3"
   end
 
   depends_on "cmake" => :build
