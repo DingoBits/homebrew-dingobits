@@ -1,6 +1,6 @@
-cask "qgis" do
-  version "3.28.1"
-  sha256 "be5fe69cc5f49fc29ff5e532a3fcddecfc9f933e23fc6ccc0b99fa61b5a4d0c0"
+cask "qgis-arm64" do
+  version "3.28.1_1"
+  sha256 "8f485ccc780e45e92353e01e42db634ed8d242ea976021812d25d70e0191839c"
 
   url "https://github.com/DingoBits/qgis-arm64-apple/releases/download/#{version}/QGIS_#{version}_arm64_apple_darwin21.7z"
   name "QGIS"
